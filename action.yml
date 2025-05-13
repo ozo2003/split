@@ -1,0 +1,26 @@
+name: 'Split Monorepo Components'
+
+description: 'Splits components from a monorepo using git subtree and pushes them to remotes.'
+
+inputs:
+    GH_TOKEN:
+        description: 'GitHub token with repo access'
+        required: true
+    REPO:
+        description: 'Source GitHub repo (org/repo)'
+        required: true
+    BRANCH:
+        description: 'Branch to split'
+        required: true
+    COMPONENTS_URL:
+        description: 'URL to components JSON'
+        required: true
+
+runs:
+    using: 'docker'
+    image: 'docker://ghcr.io/960018/action-split:latest'
+    env:
+        GH_TOKEN: ${{ inputs.GH_TOKEN }}
+        REPO: ${{ inputs.REPO }}
+        BRANCH: ${{ inputs.BRANCH }}
+        COMPONENTS_URL: ${{ inputs.COMPONENTS_URL }}
