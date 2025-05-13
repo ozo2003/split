@@ -36,7 +36,7 @@ jobs:
           fetch-depth: 0
 
       - name: Split Monorepo Components
-        uses: docker://ghcr.io/ozo2003/action-split@master
+        uses: docker://ghcr.io/ozo2003/split@master
         with:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           REPO: your-org/your-repo
@@ -96,7 +96,7 @@ jobs:
           fetch-depth: 0
 
       - name: Split Monorepo Components
-        uses: docker://ghcr.io/ozo2003/action-split@master
+        uses: docker://ghcr.io/ozo2003/split@master
         with:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           REPO: your-org/your-repo
