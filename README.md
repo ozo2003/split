@@ -31,17 +31,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+        uses: actions/checkout@v5
 
       - name: Split Monorepo Components
-        uses: docker://ghcr.io/ozo2003/split@master
+        uses: docker://ghcr.io/960018/action-split@master
         with:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           REPO: your-org/your-repo
           BRANCH: main
-          COMPONENTS_URL: https://example.com/components.json
+          # COMPONENTS_URL: https://example.com/components.json
+          COMPONENTS_JSON_PATH: .github/deploy/components.json
 ```
 
 ## Inputs
@@ -51,7 +50,9 @@ jobs:
 | `GH_TOKEN` | GitHub token with repo access to both source and target repositories | Yes | N/A |
 | `REPO` | Source GitHub repository in the format `org/repo` | Yes | N/A |
 | `BRANCH` | Branch to split (e.g., main, master) | Yes | N/A |
-| `COMPONENTS_URL` | URL to a JSON file defining the components to split | Yes | N/A |
+| `COMPONENTS_JSON_PATH` | Path of JSON file defining the components to split in current repository | Yes if COMPONENTS_URL not defined | .github/deploy/components.json |
+| `COMPONENTS_URL` | URL to a JSON file defining the components to split | Yes if COMPONENTS_JSON_PATH not defined | N/A |
+
 
 ## Components JSON Format
 
@@ -91,12 +92,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
+        uses: actions/checkout@v5
 
       - name: Split Monorepo Components
-        uses: docker://ghcr.io/ozo2003/split@master
+        uses: docker://ghcr.io/960018/action-split@master
         with:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           REPO: your-org/your-repo
